@@ -1,18 +1,20 @@
-const { auth } = require("../middleware/auth");
-const { saveNote, seeMyNotes } = require("../model/notes.model");
-const { findUserById } = require("../model/user.model");
+const { saveNote, seeMyNotes, deleteNote, updateNote } = require("../model/notes.model");
+const { findUserById, findUserByName } = require("../model/user.model");
 
 
 
 // Lägga till ny anteckning
-async function SaveNoteCtrl(request, response) {
+async function saveNoteCtrl(request, response) {
+
     // här är infon som matas in 
-    const { title, text } = request.body;
-    const userId = await findUserById(request.id)
-    console.log("här: " + userId);
+    const { username, title, text } = request.body;
+    //console.log(title);
+
+    const userId = await findUserByName(username)
+
     //Här skicka detta vidare till DB och spara i new note added
     const newNoteAdded = await saveNote(title, text, userId)
-
+    //console.log(newNoteAdded);
     //Infon som skicka till användaren
     const result = {
         success: true,
@@ -22,9 +24,8 @@ async function SaveNoteCtrl(request, response) {
 }
 
 async function showNotesCtrl(request, response) {
-    const { id } = request.params;
-
-    const myNotes = await seeMyNotes(id)
+    const { userId } = request.params;
+    const myNotes = await seeMyNotes(userId)
 
     response.json({
         success: true,
@@ -33,6 +34,38 @@ async function showNotesCtrl(request, response) {
 }
 
 
+async function deletenNoteByIdCtrl(request, response) {
+    const { noteId } = request.params;
+    const deletedNote = await deleteNote(noteId)
+
+    if (deletedNote) {
+        response.json({
+            success: true,
+            message: "note deleted"
+        })
+    } else {
+        response.json({ success: false })
+    }
+
+}
+
+async function updateNoteCtrl(request, response) {
+
+    const { noteId, title } = request.body;
+
+    const updatedNote = await updateNote(noteId, title)
+
+    if (updatedNote) {
+        response.json({
+            success: true,
+            message: "note updated"
+        })
+    } else {
+        response.json({ success: false })
+    }
+
+}
 
 
-module.exports = { SaveNoteCtrl, showNotesCtrl }
+
+module.exports = { saveNoteCtrl, showNotesCtrl, deletenNoteByIdCtrl, updateNoteCtrl }

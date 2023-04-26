@@ -1,20 +1,23 @@
 const { Router } = require('express')
-const { SaveNoteCtrl, showNotesCtrl } = require('../controller/notes.controller')
+const { saveNoteCtrl, showNotesCtrl, deletenNoteByIdCtrl, updateNoteCtrl } = require('../controller/notes.controller')
 const { auth } = require('../middleware/auth')
+const { validate } = require('../middleware/validate')
+const { saveNoteSchema } = require('../schemas/saveNote.schema')
+const { updateNoteSchema } = require('../schemas/updateNote.schema')
 const router = Router()
 
 
 //Hämta anteckningar
-router.get('/:id', showNotesCtrl )
+router.get('/:userId',auth, showNotesCtrl )
 
 //Spara anteckningar
-router.post('/', auth, SaveNoteCtrl )
+router.post('/', auth, validate(saveNoteSchema), saveNoteCtrl )
 
 //Ändra anteckningar
-router.put('/', )
+router.put('/', auth, validate(updateNoteSchema), updateNoteCtrl)
 
 //Ta bort anteckningar
-router.delete('/', )
+router.delete('/:noteId', auth, deletenNoteByIdCtrl)
 
 
 module.exports = router

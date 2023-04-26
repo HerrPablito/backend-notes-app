@@ -30,9 +30,15 @@ async function saveUser(username, hashedPass, email){
 
 }
 
+async function findUserByName(username){
+    const user = await userDb.findOne({username: username})
+    const userId = user.userId;
+    return userId
+}
+
 //logga in 
 async function findUserById(id){
-    console.log(id);
+    //console.log(id);
     return await userDb.findOne({ userId: id})
 
 
@@ -48,6 +54,8 @@ async function findUserInDb(username){
             return { success: false, message: "No user by that name" };
         }
 }
+
+
     
 
-module.exports = {saveUser, findUserInDb, findUserById}
+module.exports = {saveUser, findUserInDb, findUserById, findUserByName}

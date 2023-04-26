@@ -1,17 +1,16 @@
 const nedb = require('nedb-promises')
 const notesDb = new nedb({ filename: 'notesDb.db', autoload: true })
-const uuid =require('uuid-random')
+const uuid = require('uuid-random')
 const moment = require('moment');
-const { findUserById } = require('./user.model');
-const { request } = require('express');
 
 
-async function saveNote(title, text, userId){
-    console.log("i model " +userId);
-    const createdAt = moment().format();  
-        const noteData = { 
+
+async function saveNote(title, text, userId) {
+
+    const createdAt = moment().format();
+    const noteData = {
         userId: userId,
-        id: uuid(),
+        noteId: uuid(),
         title: title,
         text: text,
         createdAt: createdAt
@@ -24,20 +23,33 @@ async function saveNote(title, text, userId){
 
 async function seeMyNotes(id) {
 
-    
-    const myNotes = notesDb.find( { userId: id } )
-    
-    const allNotes = await myNotes.map((note) =>{
-        return {    
-            title: note.title,
-            text: note.text,
-            createdAt: note.createdAt,
-            noteId: note.id
-        }
-    })
-    console.log(allNotes);
-    return allNotes
+    const myNotes = await notesDb.find({ userId: id })
+
+    return myNotes
+}
+
+async function deleteNote(id) {
+
+    noteIsDeleted = await notesDb.remove({ noteId: id })
+    return noteIsDeleted
+}
+
+async function updateNote(id, newTitle) {
+    const modifiedAt = moment().format();
+
+    noteIsUpdated = await notesDb.update(
+        { noteId: id },
+        {
+            $set: {
+                title: newTitle,
+                modifiedAt: modifiedAt
+            }
+        },
+        { multi: false }
+    );
+
+    return noteIsUpdated;
 }
 
 
-module.exports = { saveNote, seeMyNotes }
+module.exports = { saveNote, seeMyNotes, deleteNote, updateNote }

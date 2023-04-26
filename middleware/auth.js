@@ -13,7 +13,7 @@ async function auth( request, response, next){
         request.token = token; 
         request.id = data.userId;
        
-      
+        
         next()
 
     }catch (error) {
@@ -28,4 +28,4 @@ async function auth( request, response, next){
 
 
 
-module.exports = {auth}
+module.exports = { auth }
