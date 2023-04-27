@@ -12,9 +12,8 @@ router.post('/login', validate(loginSchema), loginCtrl)
 
 router.post('/signup', validate(signupSchema), signUpCtrl)
 
-router.get('/account', auth, async (request, response) =>{
+router.get('/account', auth, async (request, response) => {
     const user = await findUserById(request.id)
- 
     response.json({ success: true, user: user.userId })
 })
 

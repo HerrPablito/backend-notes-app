@@ -1,6 +1,5 @@
 const Joi = require("joi");
 
-
 const schema = Joi.object({
     username: Joi.string()
         .alphanum()
@@ -15,7 +14,6 @@ const schema = Joi.object({
     email: Joi.string()
         .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'se'] } })
         .required()
-
 })
 
 module.exports = { signupSchema: schema }

@@ -8,9 +8,8 @@ const schema = Joi.object({
         .max(30)
         .required(),
 
-        password: Joi.string()
-        .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))      
-    
+    password: Joi.string()
+        .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
 })
 
-module.exports = {loginSchema: schema}
+module.exports = { loginSchema: schema }
