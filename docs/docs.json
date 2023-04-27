@@ -1,0 +1,322 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "description": "Add-a-note-App",
+        "title": "Swings Notes Api",
+        "version": "1.0.0"
+    },
+    "components": {
+        "schemas": {
+            "token": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    }
+                }
+            },
+            "signup": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "login": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "newNote": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "text": {
+                        "type": "string"
+                    }
+                }
+            },
+            "notes": {
+                "type": "object",
+                "properties": {
+                    "userId": {
+                        "type": "string"
+                    },
+                    "noteId": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "text": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "_id": {
+                        "type": "string"
+                    }
+                }
+            },
+            "updateNote": {
+                "type": "object",
+                "properties": {
+                    "noteId": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "paths": {
+        "/api/user/login": {
+            "post": {
+                "description": null,
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application.json": {
+                            "schema": {
+                                "$ref": "#components/schemas/login"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application.json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "succsess": {
+                                            "type": "boolean"
+                                        },
+                                        "token": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#components/schemas/token"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Loggar in och returnerar token"
+                    }
+                },
+                "summary": "Loggar in och returnerar token"
+            }
+        },
+        "/api/user/signup": {
+            "post": {
+                "description": null,
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application.json": {
+                            "schema": {
+                                "$ref": "#components/schemas/signup"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application.json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "succsess": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"                                            
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Skapar avändarkonto"
+                    }
+                },
+                "summary": "Skapar avändarkonto"
+            }
+        },
+        "/api/notes": {
+            "post": {
+                "description": null,
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application.json": {
+                            "schema": {
+                                "$ref": "#components/schemas/newNote"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application.json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "succsess": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"                                            
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Lägger till en ny anteckning"
+                    }
+                },
+                "summary": "Lägger till en ny anteckning"
+            },
+            "put": {
+                "description": null,
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application.json": {
+                            "schema": {
+                                "$ref": "#components/schemas/updateNote"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application.json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "succsess": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"                                            
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Ändrar titel i anteckning"
+                    }
+                },
+                "summary": "Ändrar titel i anteckning"
+            }
+        },
+        "/api/notes/:userId": {
+            "get": {
+                "description": null,
+                 "responses": {
+                    "200": {
+                        "content": {
+                            "application.json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "succsess": {
+                                            "type": "boolean"
+                                        },"notes": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#components/schemas/notes"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Hämtar användares anteckningar"
+                    }
+                },
+                "summary": "Hämtar användares anteckningar"
+            }
+        },
+        "/api/notes/:noteId": {
+            "delete": {
+                "description": null,
+                 "responses": {
+                    "200": {
+                        "content": {
+                            "application.json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "succsess": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"                                            
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Tar bort en anteckning"
+                    }
+                },
+                "summary": "Tar bort en anteckning"
+            }
+        },
+        "/api/notes/search/:title": {
+            "get": {
+                "description": null,
+                 "responses": {
+                    "200": {
+                        "content": {
+                            "application.json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "succsess": {
+                                            "type": "boolean"
+                                        },"notes": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#components/schemas/notes"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Hämtar sökt anteckning"
+                    }
+                },
+                "summary": "Hämtar sökt anteckning"
+            }
+        }
+    }
+}

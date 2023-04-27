@@ -5,6 +5,7 @@ const moment = require('moment');
 
 async function saveNote(title, text, userId) {
     const createdAt = moment().format();
+    
     const noteData = {
         userId: userId,
         noteId: uuid(),
@@ -46,4 +47,4 @@ async function findNote(title) {
     return allNotes
 }
 
-module.exports = { saveNote, seeMyNotes, deleteNote, updateNote, findNote }
+module.exports = { saveNote, seeMyNotes, deleteNote, updateNote, findNote, notesDb }

@@ -3,17 +3,35 @@ const nedb = require('nedb-promises')
 const userDb = new nedb({ filename: 'userDb.db', autoload: true })
 const uuid = require('uuid-random')
 
-async function saveUser(username, hashedPass, email) {
-    const userData = {
-        username: username,
-        password: hashedPass,
-        email: email,
-        userId: uuid()
-    }
+async function saveUser(username, hashedPass, email, response) {
+    const usernameCheck = await userDb.findOne({ username: username });
+    const emailCheck = await userDb.findOne({ email: email });
+    if (usernameCheck) {
+        response.json({
+            success: false,
+            message: "User already exist"
+        })
+        return false;
+    } else if (emailCheck) {
+        response.json({
+            success: false,
+            message: "Email already exist"
+        })
+        return false;
+    } else {
 
-    await userDb.insert(userData)
-    return userData;
+        const userData = {
+            username: username,
+            password: hashedPass,
+            email: email,
+            userId: uuid()
+        }
+
+        await userDb.insert(userData)
+        return userData;
+    }
 }
+
 
 async function findUserByName(username) {
     const user = await userDb.findOne({ username: username })
@@ -34,4 +52,4 @@ async function findUserInDb(username) {
     }
 }
 
-module.exports = { saveUser, findUserInDb, findUserById, findUserByName }
+module.exports = { saveUser, findUserInDb, findUserById, findUserByName, userDb }

@@ -19,7 +19,7 @@ router.put('/', auth, validate(updateNoteSchema), updateNoteCtrl)
 //Ta bort anteckningar
 router.delete('/:noteId', auth, deletenNoteByIdCtrl)
 
-//Sök anteckningar
+//Sök anteckning
 router.get('/search/:title', auth, searchNoteByTitleCtrl)
 
 

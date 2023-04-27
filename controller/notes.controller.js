@@ -3,21 +3,33 @@ const { findUserById, findUserByName } = require("../model/user.model");
 
 
 async function saveNoteCtrl(request, response) {
-    const { username, title, text } = request.body;
-    const userId = await findUserByName(username)
-    const newNoteAdded = await saveNote(title, text, userId)
+    try {
+        const { username, title, text } = request.body;
+        const userId = await findUserByName(username)
+        const newNoteAdded = await saveNote(title, text, userId)
 
-    if (newNoteAdded) {
-        response.json({
-            success: true,
-            message: "note added"
-        })
-    } else {
-        response.json({ success: false })
+        if (newNoteAdded) {
+            response.json({
+                success: true,
+                message: "note added"
+            })
+        } else {
+            response.json({ success: false })
+        }
+    } catch (error) {
+        console.error(error);
+        response.status(500).send('Internal Server Error');
     }
+
 }
 
 async function showNotesCtrl(request, response) {
+    try {
+        
+      } catch (error) {
+        console.error(error);
+        response.status(500).send('Internal Server Error'); 
+      }
     const { userId } = request.params;
     const myNotes = await seeMyNotes(userId)
 
@@ -32,7 +44,8 @@ async function showNotesCtrl(request, response) {
 }
 
 async function deletenNoteByIdCtrl(request, response) {
-    const { noteId } = request.params;
+    try {
+            const { noteId } = request.params;
     const deletedNote = await deleteNote(noteId)
 
     if (deletedNote) {
@@ -43,10 +56,16 @@ async function deletenNoteByIdCtrl(request, response) {
     } else {
         response.json({ success: false })
     }
+    } catch (error) {
+      console.error(error);
+      response.status(500).send('Internal Server Error'); 
+    }
+
 }
 
 async function updateNoteCtrl(request, response) {
-    const { noteId, title } = request.body;
+    try {
+      const { noteId, title } = request.body;
     const updatedNote = await updateNote(noteId, title)
 
     if (updatedNote) {
@@ -56,10 +75,16 @@ async function updateNoteCtrl(request, response) {
         })
     } else {
         response.json({ success: false })
+    }      
+    } catch (error) {
+      console.error(error);
+      response.status(500).send('Internal Server Error'); 
     }
+
 }
 
 async function searchNoteByTitleCtrl(request, response) {
+    try {
     const { title } = request.params
     const showSeachedNote = await findNote(title)
 
@@ -71,7 +96,12 @@ async function searchNoteByTitleCtrl(request, response) {
         })
     } else {
         response.json({ success: false })
+    }        
+    } catch (error) {
+      console.error(error);
+      response.status(500).send('Internal Server Error'); 
     }
+
 }
 
 
