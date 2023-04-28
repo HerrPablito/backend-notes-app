@@ -75,7 +75,8 @@ async function updateNoteCtrl(request, response) {
                 message: 'Note ID does not exist'
             })
         }else{
-        const updatedNote = await updateNote(noteId, title)
+            console.log(request.id);
+        const updatedNote = await updateNote(noteId, title, request.id)
 
         if (updatedNote) {
             response.json({

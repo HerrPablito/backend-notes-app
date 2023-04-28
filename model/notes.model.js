@@ -27,10 +27,11 @@ async function deleteNote(id) {
     return noteIsDeleted
 }
 
-async function updateNote(id, newTitle) {
+async function updateNote(id, newTitle, userId) {
+    console.log(userId);
     const modifiedAt = moment().format();
     noteIsUpdated = await notesDb.update(
-        { noteId: id },
+        { noteId: id, userId: userId }, 
         {
             $set: {
                 title: newTitle,

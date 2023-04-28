@@ -7,6 +7,7 @@ async function auth(request, response, next) {
         const data = jwt.verify(token, 'Nelson123');
         request.token = token;
         request.id = data.userId;
+        console.log(request.id);
         next()
     } catch (error) {
         response.json({

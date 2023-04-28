@@ -93,7 +93,7 @@
     "paths": {
         "/api/user/login": {
             "post": {
-                "description": null,
+                "description": "Loggar in och returnerar token",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -132,7 +132,7 @@
         },
         "/api/user/signup": {
             "post": {
-                "description": null,
+                "description": "Skapar avändarkonto",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -168,7 +168,7 @@
         },
         "/api/notes": {
             "post": {
-                "description": null,
+                "description": "Lägger till en ny anteckning",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -202,7 +202,7 @@
                 "summary": "Lägger till en ny anteckning"
             },
             "put": {
-                "description": null,
+                "description": "Ändrar titel i anteckning",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -238,7 +238,7 @@
         },
         "/api/notes/:userId": {
             "get": {
-                "description": null,
+                "description": "Hämtar användares anteckningar",
                  "responses": {
                     "200": {
                         "content": {
@@ -266,7 +266,7 @@
         },
         "/api/notes/:noteId": {
             "delete": {
-                "description": null,
+                "description": "Tar bort en anteckning",
                  "responses": {
                     "200": {
                         "content": {
@@ -292,7 +292,7 @@
         },
         "/api/notes/search/:title": {
             "get": {
-                "description": null,
+                "description": "Hämtar sökt anteckning",
                  "responses": {
                     "200": {
                         "content": {
