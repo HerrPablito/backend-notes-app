@@ -97,9 +97,9 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application.json": {
+                        "application/json": {
                             "schema": {
-                                "$ref": "#components/schemas/login"
+                                "$ref": "#/components/schemas/login"
                             }
                         }
                     }
@@ -107,17 +107,17 @@
                 "responses": {
                     "200": {
                         "content": {
-                            "application.json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "succsess": {
+                                        "success": {
                                             "type": "boolean"
                                         },
                                         "token": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#components/schemas/token"
+                                                "$ref": "#/components/schemas/token"
                                             }
                                         }
                                     }
@@ -136,9 +136,9 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application.json": {
+                        "application/json": {
                             "schema": {
-                                "$ref": "#components/schemas/signup"
+                                "$ref": "#/components/schemas/signup"
                             }
                         }
                     }
@@ -146,11 +146,11 @@
                 "responses": {
                     "200": {
                         "content": {
-                            "application.json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "succsess": {
+                                        "success": {
                                             "type": "boolean"
                                         },
                                         "message": {
@@ -172,9 +172,9 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application.json": {
+                        "application/json": {
                             "schema": {
-                                "$ref": "#components/schemas/newNote"
+                                "$ref": "#/components/schemas/newNote"
                             }
                         }
                     }
@@ -182,11 +182,11 @@
                 "responses": {
                     "200": {
                         "content": {
-                            "application.json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "succsess": {
+                                        "success": {
                                             "type": "boolean"
                                         },
                                         "message": {
@@ -206,9 +206,9 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application.json": {
+                        "application/json": {
                             "schema": {
-                                "$ref": "#components/schemas/updateNote"
+                                "$ref": "#/components/schemas/updateNote"
                             }
                         }
                     }
@@ -216,11 +216,11 @@
                 "responses": {
                     "200": {
                         "content": {
-                            "application.json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "succsess": {
+                                        "success": {
                                             "type": "boolean"
                                         },
                                         "message": {
@@ -242,16 +242,16 @@
                  "responses": {
                     "200": {
                         "content": {
-                            "application.json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "succsess": {
+                                        "success": {
                                             "type": "boolean"
                                         },"notes": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#components/schemas/notes"
+                                                "$ref": "#/components/schemas/notes"
                                             }
                                         }
                                     }
@@ -270,11 +270,11 @@
                  "responses": {
                     "200": {
                         "content": {
-                            "application.json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "succsess": {
+                                        "success": {
                                             "type": "boolean"
                                         },
                                         "message": {
@@ -296,16 +296,16 @@
                  "responses": {
                     "200": {
                         "content": {
-                            "application.json": {
+                            "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "succsess": {
+                                        "success": {
                                             "type": "boolean"
                                         },"notes": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#components/schemas/notes"
+                                                "$ref": "#/components/schemas/notes"
                                             }
                                         }
                                     }
